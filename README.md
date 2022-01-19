@@ -16,4 +16,6 @@
     .
     <a href="https://github.com/serdarozkan41/Do/issues">Request Feature</a>
   </p>
+  
+  [![Build status](https://build.appcenter.ms/v0.1/apps/bcc88f61-c6e3-45c2-8830-0b7897df0c99/branches/master/badge)](https://appcenter.ms) ANDROID
 </p>
