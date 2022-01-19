@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="Do.TikTokDownloader.Styles.Colors"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="WindowBackgroundColorDark">Black</Color>
+    <Color x:Key="WindowBackgroundColor">#FFFFFF</Color>
+
+    <Color x:Key="TitleLabelDark">White</Color>
+    <Color x:Key="TitleLabel">#000000</Color>
+
+    <Color x:Key="StandartLabelDark">White</Color>
+    <Color x:Key="StandartLabel">#8D8D8D</Color>
+
+    <Color x:Key="FailColor">#D04C41</Color>
+    <Color x:Key="SuccessColor">#00AF49</Color>
+
+    <Color x:Key="LightGrey">#8D8D8D</Color>
+    <Color x:Key="LightGreyDark">White</Color>
+
+    <Color x:Key="MarsBlack">#080808</Color>
+    <Color x:Key="MarsBlackDark">White</Color>
+
+    <Color x:Key="PrimaryColor">#E24E59</Color>
+
+</ResourceDictionary>

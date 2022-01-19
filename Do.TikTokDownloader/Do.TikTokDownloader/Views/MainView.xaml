@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="Do.TikTokDownloader.Views.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    xmlns:views="clr-namespace:Do.TikTokDownloader.Views"
+    android:TabbedPage.IsSmoothScrollEnabled="True"
+    android:TabbedPage.IsSwipePagingEnabled="False"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    BarBackgroundColor="White"
+    BarTextColor="Black"
+    NavigationPage.HasBackButton="False"
+    SelectedTabColor="#DE4D58"
+    UnselectedTabColor="Gray">
+    <NavigationPage.TitleView>
+        <Label
+            x:Name="LbTitle"
+            Margin="-14,0,0,0"
+            Padding="0"
+            FontFamily="{StaticResource FontSemiBold}"
+            FontSize="19"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource StandartBlackLabelStyle}"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
+    </NavigationPage.TitleView>
+    <views:HomeView
+        x:Name="HomeView"
+        Title="Dashboard"
+        IconImageSource="ic_home" />
+    <views:DownloadsView
+        x:Name="DownloadsView"
+        Title="Downloads"
+        IconImageSource="ic_download" />
+</TabbedPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="Do.TikTokDownloader.Styles.Theme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:Do.TikTokDownloader.Styles">
+    <ResourceDictionary.MergedDictionaries>
+        <styles:Colors />
+        <styles:Fonts />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="ForContentPage" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource WindowBackgroundColor}, Dark={StaticResource WindowBackgroundColorDark}}" />
+    </Style>
+
+    <Style x:Key="ForGrid" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource WindowBackgroundColor}, Dark={StaticResource WindowBackgroundColorDark}}" />
+    </Style>
+
+    <Style x:Key="TitleLabel" TargetType="Label">
+        <Setter Property="Margin" Value="20,30,50,10" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TitleLabel}, Dark={StaticResource TitleLabelDark}}" />
+        <Setter Property="FontFamily" Value="SF UI Display Bold" />
+        <Setter Property="FontSize" Value="{StaticResource Headline2FontSize}" />
+    </Style>
+
+    <Style x:Key="StandartBlackLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MarsBlack}, Dark={StaticResource MarsBlackDark}}" />
+    </Style>
+
+    <Style x:Key="StandartGrayLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightGrey}, Dark={StaticResource MarsBlackDark}}" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="Do.TikTokDownloader.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:Do.TikTokDownloader.Styles">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:Theme />
+            </ResourceDictionary.MergedDictionaries>
+
+            <OnPlatform x:Key="FontBold" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Bold" />
+                <On Platform="Android" Value="SF UI Display Bold" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontMedium" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Medium" />
+                <On Platform="Android" Value="SF UI Display Medium" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSemiBold" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Semibold" />
+                <On Platform="Android" Value="SF UI Display Semibold" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontLight" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Light" />
+                <On Platform="Android" Value="SF UI Display Light" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontThin" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Thin" />
+                <On Platform="Android" Value="SF UI Display Thin" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontBlack" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SF UI Display Black" />
+                <On Platform="Android" Value="SF UI Display Black" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

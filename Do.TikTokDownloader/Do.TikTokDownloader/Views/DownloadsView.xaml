@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Do.TikTokDownloader.Views.DownloadsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Frame
+                Padding="0"
+                CornerRadius="0"
+                HasShadow="True"
+                HeightRequest="2"
+                HorizontalOptions="FillAndExpand"
+                MinimumHeightRequest="1"
+                VerticalOptions="Start" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

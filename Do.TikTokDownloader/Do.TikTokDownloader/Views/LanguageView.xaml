@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Do.TikTokDownloader.Views.LanguageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:system="clr-namespace:System;assembly=netstandard"
+    xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    NavigationPage.HasNavigationBar="False"
+    Style="{StaticResource ForContentPage}">
+    <ContentPage.Content>
+        <Grid Style="{StaticResource ForGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="80*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Style="{StaticResource TitleLabel}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="What is your" />
+                            <Span Text="{x:Static system:Environment.NewLine}" />
+                            <Span Text="language?" />
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ListView
+                Grid.Row="1"
+                Margin="20,10,20,0"
+                android:ListView.IsFastScrollEnabled="true"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Languages}"
+                SelectionMode="None"
+                SeparatorVisibility="Default">
+                <ListView.Behaviors>
+                    <extensions:EventToCommandBehavior Command="{Binding ItemTappedCommand}" EventName="ItemTapped" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Margin="10"
+                                Padding="0"
+                                Orientation="Horizontal"
+                                Spacing="0">
+                                <Frame
+                                    Margin="0"
+                                    Padding="0"
+                                    CornerRadius="25"
+                                    HasShadow="True"
+                                    HeightRequest="50"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="50">
+                                    <Image Aspect="AspectFill" Source="{Binding LanguageIcon}" />
+                                </Frame>
+                                <Label
+                                    Margin="20,0"
+                                    FontFamily="SF UI Display Medium"
+                                    FontSize="18"
+                                    HorizontalOptions="StartAndExpand"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding LanguageName}"
+                                    TextColor="{StaticResource StandartLabel}"
+                                    VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
