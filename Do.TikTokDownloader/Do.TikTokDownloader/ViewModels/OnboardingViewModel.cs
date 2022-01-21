@@ -130,6 +130,17 @@ namespace Do.TikTokDownloader.ViewModels
                 }
             }
 
+            var forIos = await Permissions.CheckStatusAsync<Permissions.Photos>();
+            if (forIos != PermissionStatus.Granted)
+            {
+                forIos = await Permissions.RequestAsync<Permissions.Photos>();
+                if (forIos != PermissionStatus.Granted)
+                {
+                    DialogService.ShowToastError(AppResources.AccessDesc);
+                }
+            }
+            
+
             await NavigationService.NavigateToAsync<MainViewModel>();
         }
 

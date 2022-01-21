@@ -265,7 +265,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 AdsId="{OnPlatform Android='ca-app-pub-1670197314603951/4187132808',
-                                   iOS='ca-app-pub-3940256099942544/2934735716'}"
+                                   iOS='ca-app-pub-1670197314603951/5341992875'}"
                 HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="EndAndExpand" />

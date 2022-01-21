@@ -32,7 +32,7 @@ namespace Do.TikTokDownloader
         {
             InitializeComponent();
 
-            AppCenter.Start("android=6cd5f294-3003-44e0-a08a-57d48cca1d0a;", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("android=6cd5f294-3003-44e0-a08a-57d48cca1d0a;ios=bf5a3b0e-4401-406b-b7ce-84d29ad29f71;", typeof(Analytics), typeof(Crashes));
 
             if (Preferences.ContainsKey("SelectedLanguage"))
             {

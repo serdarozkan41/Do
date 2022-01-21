@@ -94,7 +94,7 @@ namespace Do.TikTokDownloader.ViewModels
             PlayCommand = new Command(PlayAsync);
             ShareCommand = new Command(ShareAsync);
             realmDb = Realm.GetInstance();
-
+            
 
             LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
             if (LastVideo != null)
@@ -146,13 +146,21 @@ namespace Do.TikTokDownloader.ViewModels
 
         private void Point(object obj)
         {
-            var dependencyService = ViewModelLocator.Resolve<IDependencyService>();
-            var e = dependencyService.Get<IInAppReviewService>();
-            e.LaunchReview();
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Launcher.OpenAsync("");
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                var dependencyService = ViewModelLocator.Resolve<IDependencyService>();
+                var e = dependencyService.Get<IInAppReviewService>();
+                e.LaunchReview();
+            }
         }
 
         private async void DownloadAsync(object obj)
         {
+            TikTokVideoUrl = "https://www.tiktok.com/@sigortacialibas/video/7043335725168839938?is_copy_url=1&is_from_webapp=v1";
             Sended = true;
             if (!string.IsNullOrEmpty(TikTokVideoUrl))
             {
@@ -290,7 +298,14 @@ namespace Do.TikTokDownloader.ViewModels
                 DialogService.ShowToastSuccess(AppResources.SuccessDownload);
                 TikTokVideoUrl = string.Empty;
                 IsBusy = false;
-                CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/4958849494");
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
+                }
             }
             catch (Exception ex)
             {

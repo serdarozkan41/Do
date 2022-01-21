@@ -50,7 +50,10 @@ namespace Do.TikTokDownloader.ViewModels
         {
             if (Device.RuntimePlatform == Device.iOS)
             {
-                //iOS stuff
+                if (!this.NativeService.OpenAnotherApp("com.zhiliaoapp.musically"))
+                {
+                    Launcher.TryOpenAsync("https://www.tiktok.com");
+                }
             }
             else if (Device.RuntimePlatform == Device.Android)
             {

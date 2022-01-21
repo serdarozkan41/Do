@@ -17,7 +17,15 @@ namespace Do.TikTokDownloader.Views
                 CrossMTAdmob.Current.ShowInterstitial();
             };
 
-            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/4958849494");
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
+            }
+            
         }
     }
 }

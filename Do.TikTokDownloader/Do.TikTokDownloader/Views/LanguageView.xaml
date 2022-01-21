@@ -4,13 +4,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:app="clr-namespace:Do.TikTokDownloader"
     xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
     xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
-     xmlns:app="clr-namespace:Do.TikTokDownloader"
-     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:system="clr-namespace:System;assembly=netstandard"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    FlowDirection="{x:Static app:App.GlobalFlow}"
     NavigationPage.HasNavigationBar="False"
     Style="{StaticResource ForContentPage}">
     <ContentPage.Content>
@@ -55,11 +55,17 @@
                                 <Frame
                                     Margin="0"
                                     Padding="0"
-                                    CornerRadius="25"
                                     HasShadow="True"
                                     HeightRequest="50"
                                     HorizontalOptions="Start"
+                                    IsClippedToBounds="True"
                                     WidthRequest="50">
+                                    <Frame.CornerRadius>
+                                        <OnPlatform x:TypeArguments="x:Single">
+                                            <On Platform="iOS" Value="25" />
+                                            <On Platform="Android" Value="25" />
+                                        </OnPlatform>
+                                    </Frame.CornerRadius>
                                     <Image Aspect="AspectFill" Source="{Binding LanguageIcon}" />
                                 </Frame>
                                 <Label

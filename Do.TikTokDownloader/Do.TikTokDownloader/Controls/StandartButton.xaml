@@ -7,7 +7,7 @@
     Padding="0"
     BackgroundColor="{StaticResource PrimaryColor}"
     CornerRadius="17"
-    HasShadow="True"
+    HasShadow="False"
     HeightRequest="60"
     HorizontalOptions="FillAndExpand"
     IsClippedToBounds="True"

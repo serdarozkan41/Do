@@ -3,14 +3,14 @@
     x:Class="Do.TikTokDownloader.Views.OnboardingView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:Do.TikTokDownloader"
     xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
     xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
-     xmlns:app="clr-namespace:Do.TikTokDownloader"
-     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    FlowDirection="{x:Static app:App.GlobalFlow}"
     NavigationPage.HasNavigationBar="False"
     Style="{StaticResource ForContentPage}">
     <ContentPage.Content>
@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
             <Image
                 Grid.Row="0"
-                Margin="20,10,0,0"
+                Margin="20,15,0,0"
                 HorizontalOptions="StartAndExpand"
                 Scale="0.9"
                 Source="{FontImage FontFamily=FAS,
