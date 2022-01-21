@@ -42,6 +42,8 @@
                 HasUnevenRows="True"
                 HorizontalOptions="FillAndExpand"
                 ItemsSource="{Binding Videos}"
+                RowHeight="200"
+                SelectionMode="None"
                 VerticalOptions="FillAndExpand">
                 <ListView.Behaviors>
                     <xct:EventToCommandBehavior Command="{Binding PlayCommand}" EventName="ItemTapped" />
@@ -54,6 +56,7 @@
                                 Padding="0"
                                 BackgroundColor="White"
                                 CornerRadius="17"
+                                HeightRequest="200"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand">
                                 <pancakeView:PancakeView.Shadow>
@@ -127,7 +130,7 @@
                                         FontFamily="{StaticResource FontLight}"
                                         FontSize="15"
                                         LineBreakMode="TailTruncation"
-                                        MaxLines="4"
+                                        MaxLines="3"
                                         Style="{StaticResource StandartGrayLabelStyle}"
                                         Text="{Binding Description}"
                                         VerticalOptions="FillAndExpand"

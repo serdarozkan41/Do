@@ -6,7 +6,7 @@ using Android.OS;
 namespace Do.TikTokDownloader.Droid.Activities
 {
     [Activity(
-          Label = "DoTikTok Downloader",
+        Label = "@string/app_name",
           Icon = "@mipmap/ic_launcher",
           Theme = "@style/Theme.Splash",
           NoHistory = true,

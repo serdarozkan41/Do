@@ -30,7 +30,9 @@
                 <RowDefinition Height="80" />
                 <RowDefinition Height="0.5" />
                 <RowDefinition Height="250" />
+
                 <RowDefinition Height="*" />
+                <RowDefinition Height="80" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -49,14 +51,48 @@
                 MinimumHeightRequest="1"
                 VerticalOptions="Start" />
 
-            <controls:StandartEntry
-                x:Name="LbUrl"
+            <StackLayout
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                LabelText="TikTok Linki"
-                PlaceHolderText="TikTok bağlantısını buraya yapıştırın."
-                Text="{Binding TikTokVideoUrl}" />
+                Margin="15,5,15,0">
+                <Label
+                    x:Name="LbText"
+                    Grid.Row="0"
+                    FontFamily="{StaticResource FontMedium}"
+                    FontSize="15"
+                    Text="TikTok Linki"
+                    TextColor="{StaticResource LightGrey}" />
+                <pancakeView:PancakeView
+                    Grid.Row="0"
+                    Margin="0,5,0,0"
+                    Padding="0"
+                    BackgroundColor="White"
+                    CornerRadius="17"
+                    HeightRequest="60"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <pancakeView:PancakeView.Border>
+                        <pancakeView:Border Thickness="3" Color="{StaticResource PrimaryColor}" />
+                    </pancakeView:PancakeView.Border>
+                    <Grid>
+                        <Entry
+                            x:Name="TbUrl"
+                            Margin="10,0,0,0"
+                            FontFamily="{StaticResource FontMedium}"
+                            FontSize="15"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Keyboard="Url"
+                            Placeholder="TikTok bağlantısını buraya yapıştırın."
+                            PlaceholderColor="{StaticResource LightGrey}"
+                            ReturnType="Search"
+                            Text="{Binding TikTokVideoUrl}"
+                            TextColor="{StaticResource MarsBlack}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </pancakeView:PancakeView>
+            </StackLayout>
 
             <controls:StandartButton
                 Grid.Row="2"
@@ -208,10 +244,17 @@
 
                 </Grid>
             </pancakeView:PancakeView>
-
+            <controls:StandartButton
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="20,10,10,10"
+                Command="{Binding PointCommand}"
+                HorizontalOptions="FillAndExpand"
+                Text="Uygulamaya Puan Ver" />
             <ad:MTAdView
                 x:Name="myAds"
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 AdsId="{OnPlatform Android='ca-app-pub-1670197314603951/4187132808',

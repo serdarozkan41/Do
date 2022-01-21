@@ -1,4 +1,6 @@
 ﻿using Do.TikTokDownloader.Models;
+using Do.TikTokDownloader.Services.Dependency;
+using Do.TikTokDownloader.Services.InAppReview;
 using Do.TikTokDownloader.Services.RequestProvider;
 using Do.TikTokDownloader.ViewModels.Base;
 using MarcTron.Plugin;
@@ -33,7 +35,7 @@ namespace Do.TikTokDownloader.ViewModels
             set
             {
                 tiktokVideoUrl = value;
-                OnPropertyChanged();
+                RaisePropertyChanged(() => TikTokVideoUrl);
             }
         }
         public FoundedVideo FoundedVideo
@@ -75,6 +77,7 @@ namespace Do.TikTokDownloader.ViewModels
         public ICommand PasteCommand { get; set; }
         public ICommand DownloadCommand { get; set; }
         public ICommand ShareCommand { get; set; }
+        public ICommand PointCommand { get; set; }
         public ICommand PlayCommand { get; protected set; }
         protected readonly IRequestProvider _requestProvider;
         #endregion
@@ -84,18 +87,11 @@ namespace Do.TikTokDownloader.ViewModels
             _requestProvider = requestProvider;
             PasteCommand = new Command(PasteAsync);
             DownloadCommand = new Command(DownloadAsync);
+            PointCommand = new Command(Point);
             PlayCommand = new Command(PlayAsync);
             ShareCommand = new Command(ShareAsync);
             realmDb = Realm.GetInstance();
-            var statusWrite = Permissions.CheckStatusAsync<Permissions.StorageWrite>().Result;
-            if (statusWrite != PermissionStatus.Granted)
-            {
-                statusWrite = Permissions.RequestAsync<Permissions.StorageWrite>().Result;
-                if (statusWrite != PermissionStatus.Granted)
-                {
-                    DialogService.ShowToastError("İndirme işlemi için izne ihtiyaç vardır. Akti durumda uygulama düzgün çalışmayacaktır.");
-                }
-            }
+            
 
             LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
             if (LastVideo != null)
@@ -134,12 +130,22 @@ namespace Do.TikTokDownloader.ViewModels
             }
         }
 
+        private void Point(object obj)
+        {
+            var dependencyService = ViewModelLocator.Resolve<IDependencyService>();
+            var e = dependencyService.Get<IInAppReviewService>();
+            e.LaunchReview();
+        }
+
         private async void DownloadAsync(object obj)
         {
 
             if (!string.IsNullOrEmpty(TikTokVideoUrl))
             {
-                if (Uri.IsWellFormedUriString(TikTokVideoUrl, UriKind.Absolute))
+                Uri uriResult;
+                bool result = Uri.TryCreate(TikTokVideoUrl, UriKind.Absolute, out uriResult)
+                    && uriResult.Scheme == Uri.UriSchemeHttps;
+                if (result)
                 {
                     var statusWrite = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
                     if (statusWrite != PermissionStatus.Granted)
@@ -243,6 +249,8 @@ namespace Do.TikTokDownloader.ViewModels
                 {
                     DialogService.ShowToastError("Lütfen tekrar deneyin bir hata oluştu!");
                     IsBusy = false;
+                    IsFounded = false;
+                    ShowFounded = false;
                     return;
                 }
 
@@ -298,15 +306,3 @@ public class VideoInfo
     public string author_name { get; set; }
     public string thumbnail_url { get; set; }
 }
-//Puanla bizi
-//var dependencyService = ViewModelLocator.Resolve<IDependencyService>();
-//var e = dependencyService.Get<IInAppReviewService>();
-//e.LaunchReview();
-
-
-//İndirme sonrası reklam açma
-//CrossMTAdmob.Current.OnInterstitialLoaded += (s, args) => {
-//    CrossMTAdmob.Current.ShowInterstitial();
-//};
-
-//CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");

@@ -12,7 +12,7 @@ using Xamarin.Essentials;
 namespace Do.TikTokDownloader.Droid.Activities
 {
     [Activity(
-        Label = "Do.TikTokDownloader",
+       Label = "@string/app_name",
         Icon = "@mipmap/ic_launcher",
         Theme = "@style/MainTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]

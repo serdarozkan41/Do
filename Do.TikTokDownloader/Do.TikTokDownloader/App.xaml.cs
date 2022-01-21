@@ -3,7 +3,9 @@ using Do.TikTokDownloader.Resources;
 using Do.TikTokDownloader.Services;
 using Do.TikTokDownloader.Services.Settings;
 using Do.TikTokDownloader.ViewModels.Base;
-using Realms;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,8 +22,8 @@ namespace Do.TikTokDownloader
         {
             InitializeComponent();
 
-
-            //Realms.Realm.DeleteRealm(new RealmConfiguration());
+            AppCenter.Start("android=6cd5f294-3003-44e0-a08a-57d48cca1d0a;",typeof(Analytics), typeof(Crashes));
+            
             if (Preferences.ContainsKey("SelectedLanguage"))
             {
                 CultureInfo language = new CultureInfo(Preferences.Get("SelectedLanguage", "en"));

@@ -33,7 +33,7 @@ namespace Do.TikTokDownloader.Droid.Services
             try
             {
                 var pathToNewFolder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads);
-                File folder = new File(pathToNewFolder, "/DoTik");
+                File folder = new File(pathToNewFolder, "/DoTikTok_Downloader");
                 if (!folder.Exists())
                 {
                     folder.Mkdir();
@@ -44,9 +44,13 @@ namespace Do.TikTokDownloader.Droid.Services
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.Write(dataArr);
                 fos.Close();
+
+                if (OnFileDownloaded != null)
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
+
                 return file.AbsolutePath;
             }
-            catch
+            catch(Exception ex)
             {
                 if (OnFileDownloaded != null)
                     OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));

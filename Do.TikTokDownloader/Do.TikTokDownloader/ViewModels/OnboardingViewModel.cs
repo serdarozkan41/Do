@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Do.TikTokDownloader.ViewModels
@@ -118,6 +119,16 @@ namespace Do.TikTokDownloader.ViewModels
 
         private async void ExitOnBoarding()
         {
+            var statusWrite = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (statusWrite != PermissionStatus.Granted)
+            {
+                statusWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                if (statusWrite != PermissionStatus.Granted)
+                {
+                    DialogService.ShowToastError("İndirme işlemi için izne ihtiyaç vardır. Akti durumda uygulama düzgün çalışmayacaktır.");
+                }
+            }
+
             await NavigationService.NavigateToAsync<MainViewModel>();
         }
 
