@@ -4,15 +4,15 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ad="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+    xmlns:app="clr-namespace:Do.TikTokDownloader"
     xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
-     xmlns:app="clr-namespace:Do.TikTokDownloader"
-     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    FlowDirection="{x:Static app:App.GlobalFlow}">
 
     <ContentPage.Content>
         <Grid
@@ -252,7 +252,7 @@
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="20,10,10,10"
+                Margin="10,5"
                 Command="{Binding PointCommand}"
                 HorizontalOptions="FillAndExpand"
                 Text="{x:Static res:AppResources.Rate}" />
