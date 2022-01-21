@@ -3,12 +3,44 @@
     x:Class="Do.TikTokDownloader.Views.HomeView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ad="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+    xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
 
     <ContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid
+            xct:StateLayout.CurrentState="{Binding MainState}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <xct:StateLayout.StateViews>
+                <xct:StateView
+                    HorizontalOptions="Center"
+                    StateKey="Loading"
+                    VerticalOptions="Center">
+                    <controls:LoadingView />
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="0.5" />
+                <RowDefinition Height="250" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
             <Frame
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Padding="0"
                 CornerRadius="0"
                 HasShadow="True"
@@ -16,6 +48,140 @@
                 HorizontalOptions="FillAndExpand"
                 MinimumHeightRequest="1"
                 VerticalOptions="Start" />
+
+            <controls:StandartEntry
+                x:Name="LbUrl"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                LabelText="TikTok Linki"
+                PlaceHolderText="TikTok bağlantısını buraya yapıştırın."
+                Text="{Binding TikTokVideoUrl}" />
+
+            <controls:StandartButton
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,10,10,10"
+                Command="{Binding PasteCommand}"
+                HorizontalOptions="FillAndExpand"
+                Text="Yapıştır" />
+
+            <controls:StandartButton
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="10,10,20,10"
+                Command="{Binding DownloadCommand}"
+                HorizontalOptions="FillAndExpand"
+                Text="İndir" />
+
+            <BoxView
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="15,0"
+                HeightRequest="0.8"
+                HorizontalOptions="FillAndExpand"
+                Opacity="0.6"
+                Color="{StaticResource LightGrey}" />
+
+            <pancakeView:PancakeView
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="15"
+                Padding="0"
+                BackgroundColor="White"
+                CornerRadius="17"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding ShowFounded}"
+                VerticalOptions="FillAndExpand">
+                <pancakeView:PancakeView.Shadow>
+                    <pancakeView:DropShadow
+                        BlurRadius="5"
+                        Opacity="0.2"
+                        Offset="0,5"
+                        Color="#303030" />
+                </pancakeView:PancakeView.Shadow>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*" />
+                        <RowDefinition Height="35*" />
+                        <RowDefinition Height="40*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="75*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Margin="10,10,0,0"
+                        Padding="0"
+                        CornerRadius="15"
+                        HasShadow="False"
+                        IsClippedToBounds="True">
+                        <Image Aspect="AspectFill" Source="{Binding FoundedVideo.CoverImgUrl}" />
+                    </Frame>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,0"
+                        FontFamily="{StaticResource FontBold}"
+                        FontSize="18"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="2"
+                        Text="{Binding FoundedVideo.Caption}"
+                        TextColor="{StaticResource MarsBlack}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,0"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="15"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="4"
+                        Text="{Binding FoundedVideo.Description}"
+                        TextColor="{StaticResource LightGrey}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Grid
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="-10,5,-10,5"
+                        Padding="0">
+                        <controls:StandartButton
+                            Margin="0,0,0,0"
+                            Padding="0"
+                            Command="{Binding PlayCommand}"
+                            Text="FİLİGRANSIZ" />
+                        <Image
+                            Grid.Row="0"
+                            Margin="0,0,40,0"
+                            HorizontalOptions="EndAndExpand"
+                            Source="{FontImage FontFamily=FAS,
+                                               Glyph={x:Static fontAwesome:FontAwesomeIcons.PlayCircle},
+                                               Color={StaticResource WindowBackgroundColor}}"
+                            VerticalOptions="Center" />
+                    </Grid>
+
+                </Grid>
+            </pancakeView:PancakeView>
+
+            <ad:MTAdView
+                x:Name="myAds"
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                AdsId="{OnPlatform Android='ca-app-pub-1670197314603951/4187132808',
+                                   iOS='ca-app-pub-3940256099942544/2934735716'}"
+                HeightRequest="60"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

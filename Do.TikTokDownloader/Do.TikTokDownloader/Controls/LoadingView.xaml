@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout
+    x:Class="Do.TikTokDownloader.Controls.LoadingView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Transparent"
+    HorizontalOptions="FillAndExpand"
+    Scale="1.2"
+    VerticalOptions="FillAndExpand">
+    <ActivityIndicator
+        HorizontalOptions="Center"
+        IsRunning="True"
+        VerticalOptions="Center"
+        Color="{AppThemeBinding Light={StaticResource PrimaryColor},
+                                Dark={StaticResource PrimaryColor}}" />
+    <Label
+        HorizontalOptions="Center"
+        Text="Loading..."
+        TextColor="{AppThemeBinding Light={StaticResource PrimaryColor},
+                                    Dark={StaticResource PrimaryColor}}" />
+</StackLayout>

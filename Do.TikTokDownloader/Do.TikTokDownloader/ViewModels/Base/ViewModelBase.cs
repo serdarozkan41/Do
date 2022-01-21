@@ -2,6 +2,7 @@
 using Do.TikTokDownloader.Services.Settings;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Do.TikTokDownloader.ViewModels.Base
@@ -11,7 +12,17 @@ namespace Do.TikTokDownloader.ViewModels.Base
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
         protected readonly ISettingsService SettingsService;
+        private LayoutState mainState;
 
+        public LayoutState MainState
+        {
+            get { return mainState; }
+            set
+            {
+                mainState = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand BackCommand { get; protected set; }
 
         private bool _isBusy;
@@ -27,6 +38,14 @@ namespace Do.TikTokDownloader.ViewModels.Base
             {
                 _isBusy = value;
                 RaisePropertyChanged(() => IsBusy);
+                if (_isBusy)
+                {
+                    MainState = LayoutState.Loading;
+                }
+                else
+                {
+                    MainState = LayoutState.None;
+                }
             }
         }
 

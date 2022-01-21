@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame
+    x:Class="Do.TikTokDownloader.Controls.StandartButton"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Margin="20,10,20,10"
+    Padding="0"
+    BackgroundColor="{StaticResource PrimaryColor}"
+    CornerRadius="17"
+    HasShadow="True"
+    HeightRequest="60"
+    HorizontalOptions="FillAndExpand"
+    IsClippedToBounds="True"
+    VerticalOptions="FillAndExpand">
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding Command}" NumberOfTapsRequired="1" />
+    </Frame.GestureRecognizers>
+    <Frame.Content>
+        <Label
+            x:Name="LbText"
+            FontFamily="{StaticResource FontSemiBold}"
+            FontSize="18"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Center"
+            Text="{Binding Text}"
+            TextColor="White"
+            VerticalOptions="FillAndExpand"
+            VerticalTextAlignment="Center" />
+    </Frame.Content>
+</Frame>

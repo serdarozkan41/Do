@@ -18,16 +18,27 @@
     <NavigationPage.TitleView>
         <Label
             x:Name="LbTitle"
-            Margin="-14,0,0,0"
             Padding="0"
             FontFamily="{StaticResource FontSemiBold}"
             FontSize="19"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
+            HorizontalOptions="Start"
+            HorizontalTextAlignment="Start"
             Style="{StaticResource StandartBlackLabelStyle}"
             VerticalOptions="Center"
             VerticalTextAlignment="Center" />
     </NavigationPage.TitleView>
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding HelpCommand}"
+            IconImageSource="ic_help"
+            Order="Primary"
+            Priority="0" />
+        <ToolbarItem
+            Command="{Binding OpenTikTokCommand}"
+            IconImageSource="ic_tiktok"
+            Order="Primary"
+            Priority="1" />
+    </TabbedPage.ToolbarItems>
     <views:HomeView
         x:Name="HomeView"
         Title="Dashboard"

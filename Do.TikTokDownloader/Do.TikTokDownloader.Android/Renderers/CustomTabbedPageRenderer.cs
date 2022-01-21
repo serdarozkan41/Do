@@ -21,25 +21,25 @@ namespace Do.TikTokDownloader.Droid.Renderers
         {
             base.OnElementChanged(e);
 
-            //if (e.OldElement == null && e.NewElement != null)
-            //{
-            //    for (int i = 0; i <= this.ViewGroup.ChildCount - 1; i++)
-            //    {
-            //        var childView = this.ViewGroup.GetChildAt(i);
-            //        if (childView is ViewGroup viewGroup)
-            //        {
-            //            for (int j = 0; j <= viewGroup.ChildCount - 1; j++)
-            //            {
-            //                var childRelativeLayoutView = viewGroup.GetChildAt(j);
-            //                if (childRelativeLayoutView is BottomNavigationView)
-            //                {
-            //                    ((BottomNavigationView)childRelativeLayoutView).ItemTextAppearanceActive = Resource.Style.MyBottomNavigationView;
-            //                    ((BottomNavigationView)childRelativeLayoutView).ItemTextAppearanceInactive = Resource.Style.MyBottomNavigationView;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            if (e.OldElement == null && e.NewElement != null)
+            {
+                for (int i = 0; i <= this.ViewGroup.ChildCount - 1; i++)
+                {
+                    var childView = this.ViewGroup.GetChildAt(i);
+                    if (childView is ViewGroup viewGroup)
+                    {
+                        for (int j = 0; j <= viewGroup.ChildCount - 1; j++)
+                        {
+                            var childRelativeLayoutView = viewGroup.GetChildAt(j);
+                            if (childRelativeLayoutView is BottomNavigationView)
+                            {
+                                ((BottomNavigationView)childRelativeLayoutView).ItemTextAppearanceActive = Resource.Style.BottomNavigationViewTextStyle;
+                                ((BottomNavigationView)childRelativeLayoutView).ItemTextAppearanceInactive = Resource.Style.BottomNavigationViewTextStyle;
+                            }
+                        }
+                    }
+                }
+            }
 
         }
     }

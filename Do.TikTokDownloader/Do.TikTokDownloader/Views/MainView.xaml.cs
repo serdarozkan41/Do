@@ -11,7 +11,7 @@ namespace Do.TikTokDownloader.Views
         public MainView()
         {
             InitializeComponent();
-            LbTitle.Text = "DoTik";
+            LbTitle.Text = "DoTikTok Downloader";
         }
 
         protected override async void OnAppearing()
@@ -24,7 +24,7 @@ namespace Do.TikTokDownloader.Views
                 {
                     case 0:
                         CurrentPage = HomeView;
-                        LbTitle.Text = "DoTik";
+                        LbTitle.Text = "DoTikTok Downloader";
                         break;
                     case 1:
                         CurrentPage = DownloadsView;
@@ -47,9 +47,8 @@ namespace Do.TikTokDownloader.Views
             }
             else if (CurrentPage is HomeView)
             {
-                LbTitle.Text = "DoTik";
+                LbTitle.Text = "DoTikTok Downloader";
             }
-
         }
     }
 }

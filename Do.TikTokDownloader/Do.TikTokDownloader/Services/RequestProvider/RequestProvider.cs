@@ -1,4 +1,7 @@
 ﻿using Do.TikTokDownloader.Exceptions;
+using Do.TikTokDownloader.Services.Dependency;
+using Do.TikTokDownloader.Services.NativeService;
+using Do.TikTokDownloader.ViewModels.Base;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -37,6 +40,58 @@ namespace Do.TikTokDownloader.Services.RequestProvider
                 JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
 
             return result;
+        }
+
+        public async Task<string> GetUrlAsync(string uri, string token = "")
+        {
+            HttpClient httpClient = CreateHttpClient(token);
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+
+            return response.RequestMessage.RequestUri.ToString(); ;
+        }
+
+        public async Task<string> GetHtmlAsync(string uri, string token = "")
+        {
+            HttpClient httpClient = CreateHttpClient(token);
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            return serialized;
+        }
+
+        public async Task<byte[]> GetByteAsync(string uri, string token = "")
+        {
+            HttpClient httpClient = CreateHttpClient(token);
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+            httpClient.DefaultRequestHeaders.Add("Referer", "https://www.tiktok.com/");
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+            await HandleResponse(response);
+            byte[] serialized = await response.Content.ReadAsByteArrayAsync();
+
+            return serialized;
+        }
+
+        public async Task<string> DownloadByteAsync(string uri, string token = "")
+        {
+            HttpClient httpClient = CreateHttpClient(token);
+            using (httpClient = CreateHttpClient(token))
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+                httpClient.DefaultRequestHeaders.Add("Referer", "https://www.tiktok.com/");
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+                await HandleResponse(response);
+                byte[] serialized = await response.Content.ReadAsByteArrayAsync();
+
+                var dependencyService = ViewModelLocator.Resolve<IDependencyService>();
+                var e = dependencyService.Get<INativeService>();
+
+                return e.WriteFile(serialized, Guid.NewGuid().ToString());
+            }
         }
 
         public async Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "", string header = "")

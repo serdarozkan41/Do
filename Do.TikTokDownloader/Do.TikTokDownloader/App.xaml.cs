@@ -49,7 +49,6 @@ namespace Do.TikTokDownloader
             
             await InitNavigation();
 
-
             base.OnResume();
         }
 

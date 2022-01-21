@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using System;
@@ -23,12 +24,9 @@ namespace Do.TikTokDownloader.Droid.Activities
 
             Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-
-
             UserDialogs.Init(this);
-       
-            SetStatusBarColor(Color.White, true);
+            SetStatusBarColor();
+            MobileAds.Initialize(ApplicationContext);
             Android.Glide.Forms.Init(this);
             LoadApplication(new App());
         }
@@ -39,8 +37,19 @@ namespace Do.TikTokDownloader.Droid.Activities
             base.OnTrimMemory(level);
         }
 
-        public void SetStatusBarColor(System.Drawing.Color color, bool darkStatusBarTint)
+        public void SetStatusBarColor()
         {
+
+            Color color = Color.White;
+            var darkStatusBarTint = true;
+            var modeManager = (UiModeManager)Platform.CurrentActivity.GetSystemService(UiModeService);
+            if (modeManager.CurrentModeType== Android.Content.Res.UiMode.NightMask)
+            {
+                color = Color.Black;
+                darkStatusBarTint = false;
+            }
+          
+
             if (Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.Lollipop)
                 return;
 
