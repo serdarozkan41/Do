@@ -5,7 +5,6 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -17,9 +16,9 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>10.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0.0</string>
+	<string>1.0.0.1</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -36,9 +35,9 @@
 	<string>This app needs access to the photo gallery for saving photos and videos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to the photo gallery for saving photos and videos</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1</string>
 	<key>XSAppIconAssets</key>
 	<string>Media.xcassets/AppIcons.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2</string>
 </dict>
 </plist>
