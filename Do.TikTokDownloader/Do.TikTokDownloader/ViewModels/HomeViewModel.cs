@@ -26,7 +26,7 @@ namespace Do.TikTokDownloader.ViewModels
         private bool showFounded;
         private bool isFounded;
         private Realm realmDb;
-      
+
         public string TikTokVideoUrl
         {
             get { return tiktokVideoUrl; }
@@ -74,6 +74,8 @@ namespace Do.TikTokDownloader.ViewModels
         }
         public ICommand PasteCommand { get; set; }
         public ICommand DownloadCommand { get; set; }
+        public ICommand ShareCommand { get; set; }
+        public ICommand PlayCommand { get; protected set; }
         protected readonly IRequestProvider _requestProvider;
         #endregion
 
@@ -82,15 +84,9 @@ namespace Do.TikTokDownloader.ViewModels
             _requestProvider = requestProvider;
             PasteCommand = new Command(PasteAsync);
             DownloadCommand = new Command(DownloadAsync);
+            PlayCommand = new Command(PlayAsync);
+            ShareCommand = new Command(ShareAsync);
             realmDb = Realm.GetInstance();
-            
-            CrossMTAdmob.Current.OnInterstitialLoaded += (s, args) => {
-                CrossMTAdmob.Current.ShowInterstitial();
-            };
-        }
-
-        public async override Task InitializeAsync(object navigationData)
-        {
             var statusWrite = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
             if (statusWrite != PermissionStatus.Granted)
             {
@@ -101,13 +97,22 @@ namespace Do.TikTokDownloader.ViewModels
                 }
             }
 
-            LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s=>s.Id).FirstOrDefault();
+            LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
             if (LastVideo != null)
             {
                 FoundedVideo = LastVideo;
                 ShowFounded = true;
             }
 
+            CrossMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+            {
+                CrossMTAdmob.Current.ShowInterstitial();
+            };
+        }
+
+        public override Task InitializeAsync(object navigationData)
+        {
+            return base.InitializeAsync(navigationData);
         }
 
         private async void PasteAsync(object obj)
@@ -115,7 +120,10 @@ namespace Do.TikTokDownloader.ViewModels
             var text = await Clipboard.GetTextAsync();
             if (!string.IsNullOrEmpty(text))
             {
-                if (Uri.IsWellFormedUriString(text, UriKind.Absolute))
+                Uri uriResult;
+                bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
+                    && uriResult.Scheme == Uri.UriSchemeHttps;
+                if (result)
                 {
                     TikTokVideoUrl = text;
                 }
@@ -125,7 +133,7 @@ namespace Do.TikTokDownloader.ViewModels
                 }
             }
         }
-     
+
         private async void DownloadAsync(object obj)
         {
 
@@ -242,18 +250,19 @@ namespace Do.TikTokDownloader.ViewModels
                 foundedVideo.DownloadedDate = DateTime.Now;
 
                 var maxVideoId = 0;
-                if (LastVideo  != null)
+                if (LastVideo != null)
                 {
                     maxVideoId = LastVideo.Id;
                 }
 
-                FoundedVideo.Id = maxVideoId+1;
+                FoundedVideo.Id = maxVideoId + 1;
                 realmDb.Write(() =>
                 {
                     realmDb.Add(FoundedVideo);
                 });
                 LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
                 FoundedVideo = LastVideo;
+                MessagingCenter.Send(this, MessageKeys.NewDownload,FoundedVideo);
                 DialogService.ShowToastSuccess("İndirme başarılı indirilenler klasöründen erişebilirsiniz.");
                 TikTokVideoUrl = string.Empty;
                 IsBusy = false;
@@ -265,6 +274,20 @@ namespace Do.TikTokDownloader.ViewModels
             }
 
             IsBusy = false;
+        }
+
+        private async void PlayAsync(object obj)
+        {
+            await NavigationService.NavigateToAsync<PlayerViewModel>(FoundedVideo.DownloadedPath);
+        }
+
+        private async void ShareAsync(object obj)
+        {
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = FoundedVideo.Caption,
+                File = new ShareFile(FoundedVideo.DownloadedPath)
+            });
         }
     }
 }

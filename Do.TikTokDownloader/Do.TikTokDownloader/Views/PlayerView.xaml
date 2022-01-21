@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Do.TikTokDownloader.Views.PlayerView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    <NavigationPage.TitleView>
+        <Label
+            x:Name="LbTitle"
+            Padding="0"
+            FontFamily="{StaticResource FontSemiBold}"
+            FontSize="19"
+            HorizontalOptions="Start"
+            HorizontalTextAlignment="Start"
+            Style="{StaticResource StandartBlackLabelStyle}"
+            Text="Video Player"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding ShareCommand}"
+            IconImageSource="{FontImage FontFamily=FAS,
+                                        Glyph={x:Static fontAwesome:FontAwesomeIcons.ShareAltSquare},
+                                        Color={StaticResource PrimaryColor}}"
+            Order="Primary"
+            Priority="0"
+            Text="Share" />
+    </ContentPage.ToolbarItems>
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <extensions:MediaElement
+            x:Name="mediaElement"
+            Grid.Row="0"
+            Margin="0"
+            AutoPlay="False"
+            BackgroundColor="Black"
+            HorizontalOptions="FillAndExpand"
+            IsLooping="False"
+            KeepScreenOn="True"
+            ShowsPlaybackControls="True"
+            Source="{Binding VideoPath}"
+            VerticalOptions="FillAndExpand" />
+    </Grid>
+</ContentPage>

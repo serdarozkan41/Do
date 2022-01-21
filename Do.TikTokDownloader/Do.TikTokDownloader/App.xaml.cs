@@ -3,6 +3,7 @@ using Do.TikTokDownloader.Resources;
 using Do.TikTokDownloader.Services;
 using Do.TikTokDownloader.Services.Settings;
 using Do.TikTokDownloader.ViewModels.Base;
+using Realms;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,6 +19,9 @@ namespace Do.TikTokDownloader
         public App()
         {
             InitializeComponent();
+
+
+            //Realms.Realm.DeleteRealm(new RealmConfiguration());
             if (Preferences.ContainsKey("SelectedLanguage"))
             {
                 CultureInfo language = new CultureInfo(Preferences.Get("SelectedLanguage", "en"));

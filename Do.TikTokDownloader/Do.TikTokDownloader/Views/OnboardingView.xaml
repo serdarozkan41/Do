@@ -3,6 +3,7 @@
     x:Class="Do.TikTokDownloader.Views.OnboardingView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
     xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
@@ -115,29 +116,23 @@
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
                 Orientation="Horizontal">
-                <Button
+                <controls:StandartButton
                     Margin="20,10"
                     BackgroundColor="{StaticResource PrimaryColor}"
                     Command="{Binding SkipCommand}"
                     CornerRadius="10"
-                    FontFamily="{StaticResource FontMedium}"
-                    FontSize="16"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand"
                     Text="{Binding SkipButtonText}"
-                    TextColor="White"
                     VerticalOptions="CenterAndExpand" />
-                <Button
+                <controls:StandartButton
                     Margin="20,10"
                     BackgroundColor="{StaticResource PrimaryColor}"
                     Command="{Binding NextCommand}"
                     CornerRadius="10"
-                    FontFamily="{StaticResource FontMedium}"
-                    FontSize="16"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand"
                     Text="{Binding NextButtonText}"
-                    TextColor="White"
                     VerticalOptions="CenterAndExpand" />
             </StackLayout>
 

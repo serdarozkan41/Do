@@ -10,5 +10,6 @@
 
         // Change selected Tab programmatically
         public const string ChangeTab = "ChangeTab";   
+        public const string NewDownload = "NewDownload";
     }
 }

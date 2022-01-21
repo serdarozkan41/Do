@@ -24,9 +24,13 @@ namespace Do.TikTokDownloader.Views
         {
             base.OnAppearing();
             var text = await Clipboard.GetTextAsync();
+           
             if (!string.IsNullOrEmpty(text))
             {
-                if (Uri.IsWellFormedUriString(text, UriKind.Absolute))
+                Uri uriResult;
+                bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
+                    && uriResult.Scheme == Uri.UriSchemeHttps;
+                if (result)
                 {
                     LbUrl.Text = text;
                 }
