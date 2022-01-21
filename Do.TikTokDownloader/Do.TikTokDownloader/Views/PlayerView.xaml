@@ -3,10 +3,13 @@
     x:Class="Do.TikTokDownloader.Views.PlayerView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:Do.TikTokDownloader"
     xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    FlowDirection="{x:Static app:App.GlobalFlow}">
     <NavigationPage.TitleView>
         <Label
             x:Name="LbTitle"
@@ -16,7 +19,7 @@
             HorizontalOptions="Start"
             HorizontalTextAlignment="Start"
             Style="{StaticResource StandartBlackLabelStyle}"
-            Text="Video Player"
+            Text="{x:Static res:AppResources.VideoPlayer}"
             VerticalOptions="Center"
             VerticalTextAlignment="Center" />
     </NavigationPage.TitleView>
@@ -28,7 +31,7 @@
                                         Color={StaticResource PrimaryColor}}"
             Order="Primary"
             Priority="0"
-            Text="Share" />
+            Text="{x:Static res:AppResources.Share}" />
     </ContentPage.ToolbarItems>
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <extensions:MediaElement

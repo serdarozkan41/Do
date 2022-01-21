@@ -16,13 +16,20 @@ namespace Do.TikTokDownloader.ViewModels
         protected readonly INativeService NativeService;
         public ICommand OpenTikTokCommand { get; set; }
         public ICommand HelpCommand { get; set; }
+        public ICommand ChangeLanguageCommand { get; set; }
 
         public MainViewModel(IDependencyService dependencyService)
         {
             OpenTikTokCommand = new Command(OpenTikTok);
             HelpCommand = new Command(OpenHelp);
+            ChangeLanguageCommand = new Command(ChangeLanguage);
             this.dependencyService = dependencyService;
             this.NativeService = this.dependencyService.Get<INativeService>();
+        }
+
+        private async void ChangeLanguage(object obj)
+        {
+            await NavigationService.NavigateToAsync<LanguageViewModel>(true);
         }
 
         public override Task InitializeAsync(object navigationData)

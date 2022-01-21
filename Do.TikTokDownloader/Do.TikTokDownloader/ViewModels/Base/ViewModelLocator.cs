@@ -40,6 +40,7 @@ namespace Do.TikTokDownloader.ViewModels.Base
             _container.Register<LanguageViewModel>();
             _container.Register<OnboardingViewModel>();
             _container.Register<PlayerViewModel>();
+            _container.Register<TrendsViewModel>();
 
             // Services - by default, TinyIoC will register interface registrations as singletons.
             _container.Register<INavigationService, NavigationService>();

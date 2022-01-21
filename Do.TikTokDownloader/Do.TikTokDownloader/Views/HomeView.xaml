@@ -5,8 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ad="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
     xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
+     xmlns:app="clr-namespace:Do.TikTokDownloader"
+     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -61,7 +64,7 @@
                     Grid.Row="0"
                     FontFamily="{StaticResource FontMedium}"
                     FontSize="15"
-                    Text="TikTok Linki"
+                    Text="{x:Static res:AppResources.TiktokUrl}"
                     TextColor="{StaticResource LightGrey}" />
                 <pancakeView:PancakeView
                     Grid.Row="0"
@@ -84,7 +87,7 @@
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Start"
                             Keyboard="Url"
-                            Placeholder="TikTok bağlantısını buraya yapıştırın."
+                            Placeholder="{x:Static res:AppResources.UrlPlaceholder}"
                             PlaceholderColor="{StaticResource LightGrey}"
                             ReturnType="Search"
                             Text="{Binding TikTokVideoUrl}"
@@ -100,7 +103,7 @@
                 Margin="20,10,10,10"
                 Command="{Binding PasteCommand}"
                 HorizontalOptions="FillAndExpand"
-                Text="Yapıştır" />
+                Text="{x:Static res:AppResources.Paste}" />
 
             <controls:StandartButton
                 Grid.Row="2"
@@ -108,7 +111,7 @@
                 Margin="10,10,20,10"
                 Command="{Binding DownloadCommand}"
                 HorizontalOptions="FillAndExpand"
-                Text="İndir" />
+                Text="{x:Static res:AppResources.Download}" />
 
             <BoxView
                 Grid.Row="3"
@@ -169,7 +172,7 @@
                             HorizontalOptions="Start"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource StandartGrayLabelStyle}"
-                            Text="Filigransız paylaşmak için buraya dokunun"
+                            Text="{x:Static res:AppResources.NoFi}"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center" />
                     </StackLayout>
@@ -237,13 +240,14 @@
                             FontFamily="{StaticResource FontBold}"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
-                            Text="Filigransız İzle"
+                            Text="{x:Static res:AppResources.NoFi2}"
                             TextColor="White"
                             VerticalTextAlignment="Center" />
                     </Grid>
 
                 </Grid>
             </pancakeView:PancakeView>
+
             <controls:StandartButton
                 Grid.Row="6"
                 Grid.Column="0"
@@ -251,7 +255,10 @@
                 Margin="20,10,10,10"
                 Command="{Binding PointCommand}"
                 HorizontalOptions="FillAndExpand"
-                Text="Uygulamaya Puan Ver" />
+                Text="{x:Static res:AppResources.Rate}" />
+
+
+
             <ad:MTAdView
                 x:Name="myAds"
                 Grid.Row="7"

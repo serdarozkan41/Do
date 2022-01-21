@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Do.TikTokDownloader.Views.TrendsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    <NavigationPage.TitleView>
+        <Label
+            x:Name="LbTitle"
+            Padding="0"
+            FontFamily="{StaticResource FontSemiBold}"
+            FontSize="19"
+            HorizontalOptions="Start"
+            HorizontalTextAlignment="Start"
+            Style="{StaticResource StandartBlackLabelStyle}"
+            Text="TikTok Trends"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
+    </NavigationPage.TitleView>
+    <WebView
+        HorizontalOptions="FillAndExpand"
+        Source="https://www.tiktok.com/"
+        VerticalOptions="FillAndExpand" />
+</ContentPage>

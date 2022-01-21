@@ -1,4 +1,5 @@
-﻿using Do.TikTokDownloader.ViewModels.Base;
+﻿using Do.TikTokDownloader.Resources;
+using Do.TikTokDownloader.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -66,25 +67,25 @@ namespace Do.TikTokDownloader.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
-            SetNextButtonText("NEXT");
-            SetSkipButtonText("SKIP");
+            SetNextButtonText(AppResources.OBV_Next);
+            SetSkipButtonText(AppResources.OBV_Skip);
             Items = new ObservableCollection<OnboardingDataModel>();
             Items.Add(new OnboardingDataModel
             {
-                Title = "Copy it if you want",
-                Content = "Open TikTok and copy and paste the link to DoTik using the share button in the right corner.",
+                Title = AppResources.OBV_Title_1,
+                Content = AppResources.OBV_Desc_1,
                 ImageUrl = "t_1.png"
             });
             Items.Add(new OnboardingDataModel
             {
-                Title = "Use the share button if you want",
-                Content = "You can start an automatic download by opening TikTok and selecting DoTik on the share button in the right corner.",
+                Title = AppResources.OBV_Title_2,
+                Content = AppResources.OBV_Desc_2,
                 ImageUrl = "t_2.png"
             });
             Items.Add(new OnboardingDataModel
             {
-                Title = "Easily share",
-                Content = "From the Downloads tab, you can watch or share their videos.",
+                Title = AppResources.OBV_Title_3,
+                Content = AppResources.OBV_Desc_3,
                 ImageUrl = "t_3.png"
             });
            
@@ -125,7 +126,7 @@ namespace Do.TikTokDownloader.ViewModels
                 statusWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
                 if (statusWrite != PermissionStatus.Granted)
                 {
-                    DialogService.ShowToastError("İndirme işlemi için izne ihtiyaç vardır. Akti durumda uygulama düzgün çalışmayacaktır.");
+                    DialogService.ShowToastError(AppResources.AccessDesc);
                 }
             }
 
@@ -145,11 +146,11 @@ namespace Do.TikTokDownloader.ViewModels
         {
             if (LastPositionReached())
             {
-                SetNextButtonText("GOT IT");
+                SetNextButtonText(AppResources.OBV_GotIt);
             }
             else
             {
-                SetNextButtonText("NEXT");
+                SetNextButtonText(AppResources.OBV_Next);
             }
         }
     }

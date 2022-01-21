@@ -22,7 +22,7 @@ namespace Do.TikTokDownloader.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources {
+    public class AppResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Do.TikTokDownloader.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Do.TikTokDownloader.Resources.AppResources", typeof(AppResources).Assembly);
@@ -51,7 +51,7 @@ namespace Do.TikTokDownloader.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,272 @@ namespace Do.TikTokDownloader.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The download requires permission. The application will not work properly in case you do not allow it..
+        /// </summary>
+        public static string AccessDesc {
+            get {
+                return ResourceManager.GetString("AccessDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously downloaded recording..
+        /// </summary>
+        public static string Again {
+            get {
+                return ResourceManager.GetString("Again", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap here to delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        public static string Downloads {
+            get {
+                return ResourceManager.GetString("Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL.
+        /// </summary>
+        public static string InvalidUrl {
+            get {
+                return ResourceManager.GetString("InvalidUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap here to share without watermark.
+        /// </summary>
+        public static string NoFi {
+            get {
+                return ResourceManager.GetString("NoFi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch Without Watermark.
+        /// </summary>
+        public static string NoFi2 {
+            get {
+                return ResourceManager.GetString("NoFi2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open TikTok and copy and paste the link to DoTik using the share button in the right corner..
+        /// </summary>
+        public static string OBV_Desc_1 {
+            get {
+                return ResourceManager.GetString("OBV_Desc_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can start an automatic download by opening TikTok and selecting DoTik on the share button in the right corner..
+        /// </summary>
+        public static string OBV_Desc_2 {
+            get {
+                return ResourceManager.GetString("OBV_Desc_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From the Downloads tab, you can watch or share their videos..
+        /// </summary>
+        public static string OBV_Desc_3 {
+            get {
+                return ResourceManager.GetString("OBV_Desc_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GOT IT.
+        /// </summary>
+        public static string OBV_GotIt {
+            get {
+                return ResourceManager.GetString("OBV_GotIt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NEXT.
+        /// </summary>
+        public static string OBV_Next {
+            get {
+                return ResourceManager.GetString("OBV_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SKIP.
+        /// </summary>
+        public static string OBV_Skip {
+            get {
+                return ResourceManager.GetString("OBV_Skip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome DoTikTok Downloader.
         /// </summary>
-        internal static string OBV_Title {
+        public static string OBV_Title {
             get {
                 return ResourceManager.GetString("OBV_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy it if you want.
+        /// </summary>
+        public static string OBV_Title_1 {
+            get {
+                return ResourceManager.GetString("OBV_Title_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the share button if you want.
+        /// </summary>
+        public static string OBV_Title_2 {
+            get {
+                return ResourceManager.GetString("OBV_Title_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easily share.
+        /// </summary>
+        public static string OBV_Title_3 {
+            get {
+                return ResourceManager.GetString("OBV_Title_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        public static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid url and then press the download button..
+        /// </summary>
+        public static string PleaseEnter {
+            get {
+                return ResourceManager.GetString("PleaseEnter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate the App.
+        /// </summary>
+        public static string Rate {
+            get {
+                return ResourceManager.GetString("Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share.
+        /// </summary>
+        public static string Share {
+            get {
+                return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Successful..
+        /// </summary>
+        public static string SuccessDelete {
+            get {
+                return ResourceManager.GetString("SuccessDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can access the download from the successful downloads folder..
+        /// </summary>
+        public static string SuccessDownload {
+            get {
+                return ResourceManager.GetString("SuccessDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TikTok Link.
+        /// </summary>
+        public static string TiktokUrl {
+            get {
+                return ResourceManager.GetString("TiktokUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are trading too often, please try again..
+        /// </summary>
+        public static string Too {
+            get {
+                return ResourceManager.GetString("Too", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please try again An error has occurred!.
+        /// </summary>
+        public static string Try {
+            get {
+                return ResourceManager.GetString("Try", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste the TikTok link here..
+        /// </summary>
+        public static string UrlPlaceholder {
+            get {
+                return ResourceManager.GetString("UrlPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video Player.
+        /// </summary>
+        public static string VideoPlayer {
+            get {
+                return ResourceManager.GetString("VideoPlayer", resourceCulture);
             }
         }
     }

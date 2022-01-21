@@ -4,10 +4,14 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
+     xmlns:app="clr-namespace:Do.TikTokDownloader"
+     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="DPage"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
         <Grid
@@ -42,7 +46,7 @@
                 HasUnevenRows="True"
                 HorizontalOptions="FillAndExpand"
                 ItemsSource="{Binding Videos}"
-                RowHeight="200"
+                RowHeight="190"
                 SelectionMode="None"
                 VerticalOptions="FillAndExpand">
                 <ListView.Behaviors>
@@ -51,14 +55,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+
                             <pancakeView:PancakeView
                                 Margin="15"
                                 Padding="0"
                                 BackgroundColor="White"
                                 CornerRadius="17"
-                                HeightRequest="200"
+                                HeightRequest="180"
                                 HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
+                                VerticalOptions="CenterAndExpand">
                                 <pancakeView:PancakeView.Shadow>
                                     <pancakeView:DropShadow
                                         BlurRadius="5"
@@ -66,12 +71,13 @@
                                         Offset="0,5"
                                         Color="#303030" />
                                 </pancakeView:PancakeView.Shadow>
-                                <Grid>
+
+                                <Grid Margin="0,5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
-                                        <RowDefinition Height="25*" />
                                         <RowDefinition Height="35*" />
-                                        <RowDefinition Height="40*" />
+                                        <RowDefinition Height="55*" />
+                                        <RowDefinition Height="30" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="25*" />
@@ -94,9 +100,11 @@
                                             HorizontalOptions="Start"
                                             HorizontalTextAlignment="Start"
                                             Style="{StaticResource StandartGrayLabelStyle}"
-                                            Text="Filigransız paylaşmak için buraya dokunun"
+                                            Text="{x:Static res:AppResources.NoFi}"
                                             VerticalOptions="Center"
                                             VerticalTextAlignment="Center" />
+
+
                                     </StackLayout>
                                     <Frame
                                         Grid.Row="1"
@@ -109,7 +117,6 @@
                                         IsClippedToBounds="True">
                                         <Image Aspect="AspectFill" Source="{Binding CoverImgUrl}" />
                                     </Frame>
-
                                     <Label
                                         Grid.Row="1"
                                         Grid.Column="1"
@@ -122,7 +129,6 @@
                                         TextColor="{StaticResource MarsBlack}"
                                         VerticalOptions="FillAndExpand"
                                         VerticalTextAlignment="Center" />
-
                                     <Label
                                         Grid.Row="2"
                                         Grid.Column="1"
@@ -136,36 +142,41 @@
                                         VerticalOptions="FillAndExpand"
                                         VerticalTextAlignment="Start" />
 
-                                    <Grid
+                                    <StackLayout
                                         Grid.Row="3"
+                                        Grid.Column="0"
                                         Grid.ColumnSpan="2"
-                                        Padding="0">
-                                        <Button
-                                            Margin="0,10,0,0"
-                                            BackgroundColor="{StaticResource PrimaryColor}"
-                                            CornerRadius="0"
-                                            FontFamily="{StaticResource FontBold}"
-                                            TextColor="White" />
+                                        Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                x:Name="BuDelete"
+                                                Command="{Binding BindingContext.DeleteCommand, Source={x:Reference Name=DPage}}"
+                                                CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
                                         <Image
-                                            Grid.Row="0"
-                                            Margin="0,10,20,0"
-                                            HorizontalOptions="EndAndExpand"
+                                            Margin="10,10,5,0"
+                                            HorizontalOptions="Start"
                                             Source="{FontImage FontFamily=FAS,
-                                                               Glyph={x:Static fontAwesome:FontAwesomeIcons.PlayCircle},
-                                                               Color={StaticResource WindowBackgroundColor}}"
+                                                               Glyph={x:Static fontAwesome:FontAwesomeIcons.TrashAlt},
+                                                               Color={StaticResource PrimaryColor}}"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Margin="0,10,0,0"
-                                            FontFamily="{StaticResource FontBold}"
-                                            FontSize="18"
-                                            HorizontalTextAlignment="Center"
-                                            Text="Filigransız İzle"
-                                            TextColor="White"
+                                            Margin="0,10,10,0"
+                                            FontFamily="{StaticResource FontMedium}"
+                                            HorizontalOptions="Start"
+                                            HorizontalTextAlignment="Start"
+                                            Style="{StaticResource StandartGrayLabelStyle}"
+                                            Text="{x:Static res:AppResources.Delete}"
+                                            VerticalOptions="Center"
                                             VerticalTextAlignment="Center" />
-                                    </Grid>
 
+
+                                    </StackLayout>
                                 </Grid>
+
+
                             </pancakeView:PancakeView>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

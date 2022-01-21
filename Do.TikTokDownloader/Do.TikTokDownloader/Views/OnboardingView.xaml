@@ -6,6 +6,8 @@
     xmlns:controls="clr-namespace:Do.TikTokDownloader.Controls"
     xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+     xmlns:app="clr-namespace:Do.TikTokDownloader"
+     FlowDirection="{x:Static app:App.GlobalFlow}"
     xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"

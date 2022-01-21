@@ -4,6 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:app="clr-namespace:Do.TikTokDownloader"
+    xmlns:res="clr-namespace:Do.TikTokDownloader.Resources"
     xmlns:viewModelBase="clr-namespace:Do.TikTokDownloader.ViewModels.Base"
     xmlns:views="clr-namespace:Do.TikTokDownloader.Views"
     android:TabbedPage.IsSmoothScrollEnabled="True"
@@ -12,6 +14,7 @@
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     BarBackgroundColor="White"
     BarTextColor="Black"
+    FlowDirection="{x:Static app:App.GlobalFlow}"
     NavigationPage.HasBackButton="False"
     SelectedTabColor="#DE4D58"
     UnselectedTabColor="Gray">
@@ -29,6 +32,11 @@
     </NavigationPage.TitleView>
     <TabbedPage.ToolbarItems>
         <ToolbarItem
+            Command="{Binding ChangeLanguageCommand}"
+            IconImageSource="ic_language"
+            Order="Primary"
+            Priority="0" />
+        <ToolbarItem
             Command="{Binding HelpCommand}"
             IconImageSource="ic_help"
             Order="Primary"
@@ -41,10 +49,14 @@
     </TabbedPage.ToolbarItems>
     <views:HomeView
         x:Name="HomeView"
-        Title="Dashboard"
+        Title="{x:Static res:AppResources.Dashboard}"
         IconImageSource="ic_home" />
     <views:DownloadsView
         x:Name="DownloadsView"
-        Title="Downloads"
+        Title="{x:Static res:AppResources.Downloads}"
         IconImageSource="ic_download" />
+    <!--<views:TrendsView
+        x:Name="TrendsView"
+        Title="TikTok"
+        IconImageSource="ic_tiktok_menu" />-->
 </TabbedPage>

@@ -1,4 +1,5 @@
 ﻿using Do.TikTokDownloader.Models;
+using Do.TikTokDownloader.Resources;
 using Do.TikTokDownloader.Services.Dependency;
 using Do.TikTokDownloader.Services.InAppReview;
 using Do.TikTokDownloader.Services.RequestProvider;
@@ -74,6 +75,8 @@ namespace Do.TikTokDownloader.ViewModels
                 OnPropertyChanged();
             }
         }
+        public bool Sended = false;
+
         public ICommand PasteCommand { get; set; }
         public ICommand DownloadCommand { get; set; }
         public ICommand ShareCommand { get; set; }
@@ -91,7 +94,7 @@ namespace Do.TikTokDownloader.ViewModels
             PlayCommand = new Command(PlayAsync);
             ShareCommand = new Command(ShareAsync);
             realmDb = Realm.GetInstance();
-            
+
 
             LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
             if (LastVideo != null)
@@ -104,6 +107,17 @@ namespace Do.TikTokDownloader.ViewModels
             {
                 CrossMTAdmob.Current.ShowInterstitial();
             };
+
+            Clipboard.ClipboardContentChanged += Clipboard_ClipboardContentChanged;
+        }
+
+        private void Clipboard_ClipboardContentChanged(object sender, EventArgs e)
+        {
+
+            PasteAsync(null);
+
+            if (!Sended)
+                DownloadAsync(null);
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -125,7 +139,7 @@ namespace Do.TikTokDownloader.ViewModels
                 }
                 else
                 {
-                    DialogService.ShowToastWarning("Geçersiz URL");
+                    DialogService.ShowToastWarning(AppResources.InvalidUrl);
                 }
             }
         }
@@ -139,7 +153,7 @@ namespace Do.TikTokDownloader.ViewModels
 
         private async void DownloadAsync(object obj)
         {
-
+            Sended = true;
             if (!string.IsNullOrEmpty(TikTokVideoUrl))
             {
                 Uri uriResult;
@@ -153,7 +167,7 @@ namespace Do.TikTokDownloader.ViewModels
                         statusWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
                         if (statusWrite != PermissionStatus.Granted)
                         {
-                            DialogService.ShowToastError("İndirme işlemi için izne ihtiyaç vardır. Akti durumda uygulama düzgün çalışmayacaktır.");
+                            DialogService.ShowToastError(AppResources.AccessDesc);
                             return;
                         }
                     }
@@ -163,13 +177,14 @@ namespace Do.TikTokDownloader.ViewModels
                 }
                 else
                 {
-                    DialogService.ShowToastWarning("Geçersiz URL");
+                    DialogService.ShowToastWarning(AppResources.InvalidUrl);
                 }
             }
             else
             {
-                DialogService.ShowToastWarning("Lütfen geçerli bir url giriniz ve ardından indir tuşuna basınız.");
+                DialogService.ShowToastWarning(AppResources.PleaseEnter);
             }
+            Sended = false;
         }
 
         private async Task DownloadVideoAsync()
@@ -177,11 +192,12 @@ namespace Do.TikTokDownloader.ViewModels
             IsBusy = true;
             try
             {
+                LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
                 var cleanUrl = await _requestProvider.GetUrlAsync(TikTokVideoUrl);
 
                 if (string.IsNullOrEmpty(cleanUrl))
                 {
-                    DialogService.ShowToastError("Çok sık işlem yapıyorsunuz lütfen tekrar deneyiniz.");
+                    DialogService.ShowToastError(AppResources.Too);
                     IsBusy = false;
                     return;
                 }
@@ -190,7 +206,7 @@ namespace Do.TikTokDownloader.ViewModels
                     var _record = realmDb.All<FoundedVideo>().Where(s => s.CleanUrl == cleanUrl).FirstOrDefault();
                     if (_record != null)
                     {
-                        DialogService.ShowToastError("Daha önce indirilmiş kayıt.");
+                        DialogService.ShowToastError(AppResources.Again);
                         IsBusy = false;
                         return;
                     }
@@ -198,7 +214,7 @@ namespace Do.TikTokDownloader.ViewModels
                 var videoInfo = await _requestProvider.GetAsync<VideoInfo>($"{InfoBaseUrl}{cleanUrl}");
                 if (videoInfo is null)
                 {
-                    DialogService.ShowToastError("Çok sık işlem yapıyorsunuz lütfen tekrar deneyiniz.");
+                    DialogService.ShowToastError(AppResources.Too);
                     IsBusy = false;
                     return;
                 }
@@ -206,7 +222,7 @@ namespace Do.TikTokDownloader.ViewModels
                 var resultHtml = await _requestProvider.GetHtmlAsync($"{DownloadBaseUrl}{cleanUrl}");
                 if (string.IsNullOrEmpty(resultHtml))
                 {
-                    DialogService.ShowToastError("Çok sık işlem yapıyorsunuz lütfen tekrar deneyiniz.");
+                    DialogService.ShowToastError(AppResources.Too);
                     IsBusy = false;
                     return;
                 }
@@ -238,7 +254,7 @@ namespace Do.TikTokDownloader.ViewModels
 
                 if (!IsFounded)
                 {
-                    DialogService.ShowToastError("Lütfen tekrar deneyin bir hata oluştu!");
+                    DialogService.ShowToastError(AppResources.Try);
                     IsBusy = false;
                     return;
                 }
@@ -247,7 +263,7 @@ namespace Do.TikTokDownloader.ViewModels
 
                 if (downloadedPath is null)
                 {
-                    DialogService.ShowToastError("Lütfen tekrar deneyin bir hata oluştu!");
+                    DialogService.ShowToastError(AppResources.Try);
                     IsBusy = false;
                     IsFounded = false;
                     ShowFounded = false;
@@ -270,15 +286,15 @@ namespace Do.TikTokDownloader.ViewModels
                 });
                 LastVideo = realmDb.All<FoundedVideo>().OrderByDescending(s => s.Id).FirstOrDefault();
                 FoundedVideo = LastVideo;
-                MessagingCenter.Send(this, MessageKeys.NewDownload,FoundedVideo);
-                DialogService.ShowToastSuccess("İndirme başarılı indirilenler klasöründen erişebilirsiniz.");
+                MessagingCenter.Send(this, MessageKeys.NewDownload, FoundedVideo);
+                DialogService.ShowToastSuccess(AppResources.SuccessDownload);
                 TikTokVideoUrl = string.Empty;
                 IsBusy = false;
                 CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
             }
             catch (Exception ex)
             {
-                DialogService.ShowToastError("Lütfen daha sonra tekrar deneyiniz.");
+                DialogService.ShowToastError(AppResources.Try);
             }
 
             IsBusy = false;

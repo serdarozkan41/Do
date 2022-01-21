@@ -14,7 +14,7 @@ namespace Do.TikTokDownloader.ViewModels
     {
         #region PROPS
         private ObservableCollection<LanguageDataModel> languages;
-
+        private bool MainSender = false;
         public ObservableCollection<LanguageDataModel> Languages
         {
             get { return languages; }
@@ -35,18 +35,23 @@ namespace Do.TikTokDownloader.ViewModels
 
         public async override Task InitializeAsync(object navigationData)
         {
+            if (navigationData != null)
+            {
+                MainSender = (bool)navigationData;
+            }
             Languages = new ObservableCollection<LanguageDataModel>();
-            Languages.Add(new LanguageDataModel { LanguageCode = "tr", LanguageIcon = "ic_tr", LanguageName = "Turkish" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "uk", LanguageIcon = "ic_uk", LanguageName = "English" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "ru", LanguageIcon = "ic_ru", LanguageName = "Russian" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "pt", LanguageIcon = "ic_pt", LanguageName = "Portuguese" });
+            Languages.Add(new LanguageDataModel { LanguageCode = "tr", LanguageIcon = "ic_tr", LanguageName = "Turkish" });//
+            Languages.Add(new LanguageDataModel { LanguageCode = "en", LanguageIcon = "ic_uk", LanguageName = "English (US)" });//
+            Languages.Add(new LanguageDataModel { LanguageCode = "ru", LanguageIcon = "ic_ru", LanguageName = "Russian" });//
+            Languages.Add(new LanguageDataModel { LanguageCode = "pt", LanguageIcon = "ic_pt", LanguageName = "Portuguese" });//
             Languages.Add(new LanguageDataModel { LanguageCode = "id", LanguageIcon = "ic_id", LanguageName = "Indonesian" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "hi", LanguageIcon = "ic_hi", LanguageName = "Hindi" });
+            Languages.Add(new LanguageDataModel { LanguageCode = "hi", LanguageIcon = "ic_hi", LanguageName = "Hindi" });//
             Languages.Add(new LanguageDataModel { LanguageCode = "fr", LanguageIcon = "ic_fr", LanguageName = "French" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "es", LanguageIcon = "ic_es", LanguageName = "Spanish" });
-            Languages.Add(new LanguageDataModel { LanguageCode = "zh", LanguageIcon = "ic_ch", LanguageName = "Chinese" });
+            Languages.Add(new LanguageDataModel { LanguageCode = "es", LanguageIcon = "ic_es", LanguageName = "Spanish" });//
+            Languages.Add(new LanguageDataModel { LanguageCode = "zh-CN", LanguageIcon = "ic_ch", LanguageName = "Chinese" });//
             Languages.Add(new LanguageDataModel { LanguageCode = "ar", LanguageIcon = "ic_ar", LanguageName = "Arabic" });
             await Task.Delay(10);
+
         }
 
         private async void ItemTappedAsync(object obj)
@@ -57,7 +62,25 @@ namespace Do.TikTokDownloader.ViewModels
             CultureInfo language = new CultureInfo(Preferences.Get("SelectedLanguage", "en"));
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = language;
-            await NavigationService.NavigateToAsync<OnboardingViewModel>();
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (selectedLanguage.LanguageCode == "ar")
+                {
+                    App.Current.MainPage.FlowDirection = FlowDirection.RightToLeft;
+                    DialogService.ShowToastMessage("أعد تشغيل التطبيق لتصبح التغييرات سارية المفعول.");
+                }
+                else
+                {
+                    App.Current.MainPage.FlowDirection = FlowDirection.LeftToRight;
+                }
+            });
+
+
+            if (MainSender)
+                await NavigationService.NavigateToAsync<MainViewModel>();
+            else
+                await NavigationService.NavigateToAsync<OnboardingViewModel>();
         }
         #endregion
     }
