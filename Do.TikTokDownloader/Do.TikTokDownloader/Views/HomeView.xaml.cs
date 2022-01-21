@@ -19,22 +19,5 @@ namespace Do.TikTokDownloader.Views
 
             CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-1670197314603951/7193226632");
         }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            var text = await Clipboard.GetTextAsync();
-           
-            if (!string.IsNullOrEmpty(text))
-            {
-                Uri uriResult;
-                bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
-                    && uriResult.Scheme == Uri.UriSchemeHttps;
-                if (result)
-                {
-                    LbUrl.Text = text;
-                }
-            }
-        }
     }
 }

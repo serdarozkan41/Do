@@ -87,10 +87,10 @@ namespace Do.TikTokDownloader.ViewModels
             PlayCommand = new Command(PlayAsync);
             ShareCommand = new Command(ShareAsync);
             realmDb = Realm.GetInstance();
-            var statusWrite = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            var statusWrite = Permissions.CheckStatusAsync<Permissions.StorageWrite>().Result;
             if (statusWrite != PermissionStatus.Granted)
             {
-                statusWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                statusWrite = Permissions.RequestAsync<Permissions.StorageWrite>().Result;
                 if (statusWrite != PermissionStatus.Granted)
                 {
                     DialogService.ShowToastError("İndirme işlemi için izne ihtiyaç vardır. Akti durumda uygulama düzgün çalışmayacaktır.");
