@@ -3,12 +3,21 @@
     x:Class="Do.TikTokDownloader.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
     xmlns:styles="clr-namespace:Do.TikTokDownloader.Styles">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <styles:Theme />
+
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="controls:MTAdView">
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <x:OnIdiom Phone="50" Tablet="90" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <OnPlatform x:Key="FontBold" x:TypeArguments="x:String">
                 <On Platform="iOS" Value="SF UI Display Bold" />

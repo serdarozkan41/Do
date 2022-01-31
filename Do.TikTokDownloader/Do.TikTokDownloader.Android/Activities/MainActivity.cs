@@ -21,12 +21,13 @@ namespace Do.TikTokDownloader.Droid.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            MobileAds.Initialize(ApplicationContext);
 
             Platform.Init(this, savedInstanceState);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             SetStatusBarColor();
-            MobileAds.Initialize(ApplicationContext);
             Android.Glide.Forms.Init(this);
             LoadApplication(new App());
         }
