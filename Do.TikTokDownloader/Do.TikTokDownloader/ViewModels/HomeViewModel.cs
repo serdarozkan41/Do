@@ -160,7 +160,6 @@ namespace Do.TikTokDownloader.ViewModels
 
         private async void DownloadAsync(object obj)
         {
-            TikTokVideoUrl = "https://www.tiktok.com/@sigortacialibas/video/7043335725168839938?is_copy_url=1&is_from_webapp=v1";
             Sended = true;
             if (!string.IsNullOrEmpty(TikTokVideoUrl))
             {
